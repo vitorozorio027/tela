@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano Mestre de Manutenção</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #314d7a;
+            color: #ffffff;
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centralizar o conteúdo horizontalmente */
+        }
+
+        .logo {
+            width: 200px; /* Defina a largura da sua logomarca */
+            margin-bottom: 10px; /* Espaçamento entre a logomarca e o texto do cabeçalho */
+            margin-top: 21px;
+            margin-left: 42px
+        }
+
+        .button {
+            display: block;
+            width: 270px;
+            height: 35px;
+            background-color: #314d7a;
+            color: white;
+            text-align: center;
+            padding-left: 10px; 
+            margin-bottom: 13px; /* Aumentei a margem inferior para separar os botões */
+            margin-top: 10px;
+            margin-left: 12px; 
+            border: none; /* Removi a borda para um visual mais limpo */
+            border-radius: 5px; /* Adicionei borda arredondada */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Adicionei efeito de transição */
+            cursor: pointer; /* Alterei o cursor ao passar sobre o botão */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adicionei sombra sutil */
+        }
+
+        /* Efeito hover */
+        .button:hover {
+            background-color: #274266; /* Alterei a cor de fundo ao passar o mouse */
+            transform: translateY(-3px); /* Efeito de levantar um pouco ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <strong>DM242 REV083 PLANO MESTRE DE MANUTENÇÃO</strong>
+    </div>
+
+    <!-- Colocando a logomarca aqui -->
+    <img src="/LogomarcaEngenharia.png" alt="Logo da Empresa" class="logo">
+
+    <!-- Botões -->
+    <button class='button'>ESTRUTURAÇÃO BÁSICA</button>
+    <button class='button'>DEFINIÇÃO DE CONTEÚDO</button>
+    <button class='button'>DEFINIÇÃO DE ESTRATÉGIAS</button>
+    <button class='button'>NIVELAMENTO DE RECURSO</button>
+    <button class='button'>RELATÓRIO PARA CARGA DE DADOS</button>
+    <button class='button'>LISTA DE TAREFAS</button>
+    <button class='button'>PLANOS</button>
+    <button class='button'>PARAMETRIZAÇÃO DO SISTEMA</button>
+    <!-- Adicione mais botões conforme necessário -->
+</body>
+</html>

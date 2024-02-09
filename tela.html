@@ -23,6 +23,11 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             width: 320px;
             text-align: center;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+        .login-container.fade-out {
+            opacity: 0;
         }
         .login-container input[type="text"],
         .login-container input[type="password"] {
@@ -93,30 +98,78 @@
             margin: 0 auto;
             width: 304px; /* Largura padrão do Recaptcha */
         }
+        .error {
+    border: 2px solid red !important;
+}
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container" id="loginContainer">
         <img src="/LogomarcaEngenharia.png" alt="Logomarca" width="200">
-        ﾠ
         <form id="loginForm">
             <label for="login">Login</label>
             <input type="text" id="login" placeholder="Digite seu login">
             <label for="senha">Senha</label>
             <input type="password" id="senha" placeholder="Digite sua senha">
+            <!-- Adicionando o reCAPTCHA -->
             <div class="g-recaptcha" data-sitekey="6LemFWspAAAAAG-6eAY4gborCdmvFeVpVWw1ykFP"></div>
             <button type="button" id="loginButton">Entrar</button>
             <p id="errorMessage" style="color: red; display: none;">Login ou Senha incorretos.</p>
+            <p id="recaptchaErrorMessage" style="color: red; display: none;">Por favor, ative o reCAPTCHA.</p>
+            <p id="blankFieldsErrorMessage" style="color: red; display: none;">Por favor, preencha todos os campos.</p>
         </form>
         <p><a href="#">Esqueceu a senha? Clique aqui.</a> </p>
     </div>
+    <!-- Adicionando o script do reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
+        const users = {
+            "vitor": "ozorio",
+            "yanick": "santos",
+            "alex": "martins"
+        };
+
         document.getElementById('loginButton').addEventListener('click', function() {
-            document.getElementById('errorMessage').style.display = 'block';
-            setTimeout(function() {
-                location.reload();
-            }, 800); 
+            const login = document.getElementById('login').value;
+            const senha = document.getElementById('senha').value;
+            const recaptchaResponse = grecaptcha.getResponse(); // Obtém a resposta do reCAPTCHA
+            if (login.trim() === '' || senha.trim() === '') {
+                // Exibe mensagem de erro se o login ou a senha estiverem em branco
+                document.getElementById('blankFieldsErrorMessage').style.display = 'block';
+                // Oculta a mensagem após 10 segundos
+                setTimeout(function() {
+                    document.getElementById('blankFieldsErrorMessage').style.display = 'none';
+                }, 4000);
+                // Limpa os campos de login e senha
+                document.getElementById('login').value = '';
+                document.getElementById('senha').value = '';
+            } else if (users[login] && users[login] === senha) {
+                if (recaptchaResponse !== '') {
+                    // Adiciona classe para animar a saída suave da tela de login
+                    document.getElementById('loginContainer').classList.add('fade-out');
+                    // Redireciona para o site após a animação
+                    setTimeout(function() {
+                        window.location.href = 'http://pred.com.br/'; // Altere para o site desejado
+                    }, 100);
+                } else {
+                    // Exibe mensagem de erro se o reCAPTCHA não estiver ativado
+                    document.getElementById('recaptchaErrorMessage').style.display = 'block';
+                    // Oculta a mensagem após 10 segundos
+                    setTimeout(function() {
+                        document.getElementById('recaptchaErrorMessage').style.display = 'none';
+                    }, 4000);
+                }
+            } else {
+                // Exibe mensagem de erro
+                document.getElementById('errorMessage').style.display = 'block';
+                // Oculta a mensagem após 10 segundos
+                setTimeout(function() {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 4000);
+                // Limpa os campos de login e senha
+                document.getElementById('login').value = '';
+                document.getElementById('senha').value = '';
+            }
         });
     </script>
 </body>
